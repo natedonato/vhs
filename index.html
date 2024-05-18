@@ -1,0 +1,175 @@
+<div class="vhs-container">
+  <div class="vhs">
+    <div class="vhs-face-front"></div>
+    <div class="vhs-face-back"></div>
+    <div class="vhs-face-right"></div>
+    <div class="vhs-face-left"></div>
+    <div class="vhs-face-top"></div>
+    <div class="vhs-face-bottom"></div>
+  </div>
+</div>
+<style>
+  :root {
+    --vhs-length: 187px;
+    --vhs-height: 102px;
+    --vhs-depth: 25px;
+    --vhs-scale-factor: 2;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0px;
+  }
+
+  html {
+    background: linear-gradient(45deg, rgb(255, 192, 0), transparent);
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .vhs-container {
+    width: calc(var(--vhs-length) * var(--vhs-scale-factor));
+    height: calc(var(--vhs-height) * var(--vhs-scale-factor));
+    perspective: calc(2 * var(--vhs-length) * var(--vhs-scale-factor))
+  }
+
+  .vhs {
+    width: calc(var(--vhs-length) * var(--vhs-scale-factor));
+    height: calc(var(--vhs-height) * var(--vhs-scale-factor));
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-50px);
+
+    animation: rotateAnimation 10s linear infinite;
+
+  }
+
+  @keyframes rotateAnimation {
+    0% {
+      transform: rotateX(-20deg) rotateY(0deg);
+    }
+
+    100%{
+      transform: rotateX(340deg) rotateY(360deg);
+
+    }
+  }
+
+  .vhs * {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    opacity: 0.99;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+
+    /* border: 1px solid red; */
+  }
+
+  /* dimensions */
+  .vhs-face-front,
+  .vhs-face-back {
+    width: calc(var(--vhs-length) * var(--vhs-scale-factor));
+    height: calc(var(--vhs-height) * var(--vhs-scale-factor));
+  }
+
+  .vhs-face-right,
+  .vhs-face-left {
+    height: calc(var(--vhs-height) * var(--vhs-scale-factor));
+    width: calc(var(--vhs-depth) * var(--vhs-scale-factor));
+  }
+
+  .vhs-face-top,
+  .vhs-face-bottom {
+    height: calc(var(--vhs-depth) * var(--vhs-scale-factor));
+    width: calc(var(--vhs-length) * var(--vhs-scale-factor));
+  }
+
+  /* images */
+  .vhs-face-front {
+    background-image: url(./front1.jpg);
+  }
+
+  .vhs-face-back {
+    background-image: url(./back.jpg);
+  }
+
+  .vhs-face-left {
+    background-image: url(./left.jpg);
+  }
+
+  .vhs-face-right {
+    background-image: url(./right.jpg);
+  }
+
+  .vhs-face-top {
+    background-image: url(./top.jpg);
+  }
+
+  .vhs-face-bottom {
+    background-image: url(./bottom.jpg);
+  }
+
+  /* 3d positions */
+
+  .vhs-face-front {
+    transform: rotateY(0deg) translateZ(calc(var(--vhs-depth) * var(--vhs-scale-factor) / 2));
+  }
+
+  .vhs-face-back {
+    transform: rotateY(180deg) translateZ(calc(var(--vhs-depth) * var(--vhs-scale-factor) / 2));
+  }
+
+  .vhs-face-right {
+    transform: rotateY(90deg) translateZ(calc(var(--vhs-length) * var(--vhs-scale-factor) / 2));
+  }
+
+  .vhs-face-left {
+    transform: rotateY(-90deg) translateZ(calc(var(--vhs-length) * var(--vhs-scale-factor) / 2));
+  }
+
+  .vhs-face-top {
+    transform: rotateX(90deg) translateZ(calc(var(--vhs-height) * var(--vhs-scale-factor) / 2));
+  }
+
+  .vhs-face-bottom {
+    transform: rotateX(-90deg) translateZ(calc(var(--vhs-height) * var(--vhs-scale-factor) / 2));
+  }
+</style>
+
+<script>
+  const initialScale = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--vhs-scale-factor'));
+  let initialWidth = window.getComputedStyle(document.documentElement).getPropertyValue('--vhs-length');
+
+  initialWidth = parseInt(initialWidth.slice(0, initialWidth.length - 2));
+
+  function scaleDown(e) {
+    const newWidth = window.innerWidth;
+
+    if (initialWidth * initialScale > newWidth - 20) {
+      let newScale = (newWidth - 20) / initialWidth;
+      document.documentElement.style.setProperty('--vhs-scale-factor', newScale);
+    }
+    // console.log(newWidth, initialWidth, initialScale);
+  }
+
+  window.addEventListener("resize", scaleDown)
+
+  scaleDown();
+
+
+</script>
