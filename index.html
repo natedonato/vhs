@@ -9,6 +9,14 @@
   </div>
 </div>
 <style>
+  /* preload images */
+
+  body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1; 
+    content:url(./front.jpg) url(./front2.png);  
+  }
+
+  /* vars */
   :root {
     --vhs-length: 187px;
     --vhs-height: 102px;
@@ -101,7 +109,10 @@
 
   /* images */
   .vhs-face-front {
-    background-image: url(./front1.jpg);
+    background-image: url(./front.jpg);
+  }
+  .vhs-face-front:hover {
+    background-image: url(./front2.jpg);
   }
 
   .vhs-face-back {
