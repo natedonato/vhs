@@ -48,7 +48,8 @@
     body {
       margin: 0;
       padding: 0px;
-      min-height: 100%;;
+      min-height: 100%;
+      ;
     }
 
     html {
@@ -191,7 +192,7 @@
       if (initialWidth * initialScale > newWidth - 20) {
         let newScale = (newWidth - 20) / initialWidth;
         document.documentElement.style.setProperty('--vhs-scale-factor', newScale);
-      }else{
+      } else {
         document.documentElement.style.setProperty('--vhs-scale-factor', initialScale);
       }
       // console.log(newWidth, initialWidth, initialScale);
