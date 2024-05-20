@@ -48,10 +48,12 @@
     body {
       margin: 0;
       padding: 0px;
+      min-height: 100%;;
     }
 
     html {
       background: linear-gradient(45deg, rgb(255, 192, 0), transparent);
+      height: 100%;
     }
 
     body {
@@ -189,6 +191,8 @@
       if (initialWidth * initialScale > newWidth - 20) {
         let newScale = (newWidth - 20) / initialWidth;
         document.documentElement.style.setProperty('--vhs-scale-factor', newScale);
+      }else{
+        document.documentElement.style.setProperty('--vhs-scale-factor', initialScale);
       }
       // console.log(newWidth, initialWidth, initialScale);
     }
